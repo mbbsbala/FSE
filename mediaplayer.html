@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.min.css"-->
+    <title>Media Player</title>
+    <style>
+    .wrapper{
+        width: 700px;
+        padding:20px;
+    }
+    .videoControls{
+        padding-top:20px;
+    }
+    .buttonControl{
+        padding: 15px;
+        border: none;
+        border-radius: 30px;
+        margin-left:25px;
+        background: #3c6ad0;
+    }
+    .buttonControl1{
+        padding: 15px;
+        border: none;
+        margin-left:25px;
+        background: none;
+        color:green;
+        font-size:18px;
+    }
+    .buttonControl1 span.glyphicon {
+        margin-right: 2px; display: inline-block
+    }
+    .redColor{
+        color:red !important;
+    }
+    </style>
+    </head>
+    <body onload="init();">
+        <div class="wrapper">
+            <video id="myVideo" width="700"> 
+                <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm> 
+                <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg> 
+                <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp>
+            </video>
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="70"
+                aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    
+                </div>
+            </div>
+            <div class="videoControls">
+                <button class="buttonControl" onclick="videoControl('play')">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </button>
+                <button class="buttonControl" onclick="videoControl('pause')">
+                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                </button>
+                <button class="buttonControl" onclick="videoControl('stop')">
+                    <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                </button>
+                <button id="minus" class="buttonControl" onclick="videoControl('minus')">
+                    <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+                </button>
+                <button id="plus" class="buttonControl" onclick="videoControl('plus')">
+                        <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                </button>
+                <button id="plus" class="buttonControl" onclick="videoControl('headphone')">
+                        <span class="glyphicon glyphicon-headphones" aria-hidden="true"></span>
+                </button>
+                <button class="buttonControl1" onclick="videoControl('like')">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    <span id="likeCount"></span>
+                </button>
+                <button class="buttonControl1 redColor" onclick="videoControl('dislike')">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                    <span id="dislikeCount"></span>
+                </button>
+                <i class="far fa-rectangle-landscape"></i>
+            </div>
+        </div>
+        <script>
+            function init() {
+                var vid = document.getElementById("myVideo");  
+                // Check browser support
+                if (typeof(Storage) !== "undefined") {
+                // Store
+                if(!localStorage.like){
+                    localStorage.setItem("like", 0);
+                }
+                if(!localStorage.dislike) {
+                    localStorage.setItem("dislike", 0);
+                }
+                // Retrieve
+                document.getElementById("likeCount").innerHTML = localStorage.getItem("like");
+                document.getElementById("dislikeCount").innerHTML = localStorage.getItem("dislike");
+                } else {
+                    alert("Sorry, your browser does not support Web Storage...");
+                }
+                vid.addEventListener('timeupdate', updateProgressBar, false);
+            }
+
+            function updateProgressBar() {
+                var vid = document.getElementById("myVideo");  
+                var progressBar = document.getElementById('progress-bar');
+                var percentage = Math.floor((100 / vid.duration) * vid.currentTime);
+                //progressBar.value = percentage;
+                progressBar.style.width = percentage + '%';
+            }
+
+            function videoControl(action) {
+                var vid = document.getElementById("myVideo");    
+                console.log(vid.volume);
+
+                if(action == "like") {
+                    var count = Number(localStorage.getItem("like"));
+                    ++count;
+                    localStorage.setItem("like", count);
+                    init();
+                } else if(action == "dislike") {
+                    var count = Number(localStorage.getItem("dislike"));
+                    ++count;
+                    localStorage.setItem("dislike", count);
+                    init();
+                } else if(action == "play") {
+                    vid.play();
+                } else if(action == "pause") {
+                    vid.pause();
+                } else if(action == "stop") {
+                    vid.pause();
+                    vid.currentTime = 0;
+                } else if(action == "plus") {
+                    var vol =  parseFloat(vid.volume).toFixed(1);
+                    if(vol < 1){
+                        vid.volume = vid.volume + 0.1;
+                    }
+                } else if(action == "minus") {
+                    var vol =  parseFloat(vid.volume).toFixed(1);
+                    if(vol >0){
+                        vid.volume = vid.volume - 0.1;
+                    }
+                } else if(action == "headphone") {
+                    if(vid.muted){
+                        vid.muted = false;
+                    } else {
+                        vid.muted = true;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
