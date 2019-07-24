@@ -15,7 +15,7 @@
         padding-bottom:20px;
     }
     .buttonControl{
-        padding: 15px;
+        padding: 12px;
         border: none;
         border-radius: 30px;
         margin-left:15px;
@@ -62,6 +62,9 @@
                         <button id="stop" class="buttonControl" onclick="videoControl('stop')">
                             <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                         </button>
+                        <button id="stop" class="buttonControl" onclick="videoControl('refresh')">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                            </button>
                         <button id="minus" class="buttonControl" onclick="videoControl('minus')">
                             <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
                         </button>
@@ -201,6 +204,13 @@
                     document.getElementById("stop").disabled = true;
                     document.getElementById("pause").disabled = false;
                     document.getElementById("play").disabled = false;
+                } else if(action == "refresh") {
+                    vid.pause();
+                    vid.currentTime = 0;
+                    vid.play();                    
+                    document.getElementById("stop").disabled = false;
+                    document.getElementById("pause").disabled = false;
+                    document.getElementById("play").disabled = true;
                 } else if(action == "plus") {
                     var vol =  parseFloat(vid.volume).toFixed(1);
                     if(vol < 1){
