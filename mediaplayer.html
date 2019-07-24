@@ -6,23 +6,26 @@
     <title>Media Player</title>
     <style>
     .wrapper{
-        width: 700px;
+        width: 600px;
         padding:20px;
+        background: #e5e90a;
     }
     .videoControls{
         padding-top:20px;
+        padding-bottom:20px;
     }
     .buttonControl{
         padding: 15px;
         border: none;
         border-radius: 30px;
-        margin-left:25px;
-        background: #3c6ad0;
+        margin-left:15px;
+        background:slategray;
+        border-color: black;        
     }
     .buttonControl1{
-        padding: 15px;
+        padding: 10px;
         border: none;
-        margin-left:25px;
+        margin-left:15px;
         background: none;
         color:green;
         font-size:18px;
@@ -33,50 +36,85 @@
     .redColor{
         color:red !important;
     }
+    .playlist{
+        padding-top:20px;
+    }
     </style>
     </head>
     <body onload="init();">
-        <div class="wrapper">
-            <video id="myVideo" width="700"> 
-                <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm> 
-                <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg> 
-                <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
-                <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp>
-            </video>
-            <div class="progress">
-                <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="70"
-                aria-valuemin="0" aria-valuemax="100" style="width:0%">
+        <div class="container" style="background:#e5e90a;padding:20px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <video id="myVideo" width="600">  
+                            <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm> 
+                            <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg> 
+                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                            <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp>
+                    </video>
                     
+                    <div class="videoControls">
+                        <button id="play" class="buttonControl" onclick="videoControl('play')">
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        </button>
+                        <button id="pause" class="buttonControl" onclick="videoControl('pause')">
+                            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                        </button>
+                        <button id="stop" class="buttonControl" onclick="videoControl('stop')">
+                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                        </button>
+                        <button id="minus" class="buttonControl" onclick="videoControl('minus')">
+                            <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+                        </button>
+                        <button id="plus" class="buttonControl" onclick="videoControl('plus')">
+                                <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                        </button>
+                        <button id="headphone" class="buttonControl" onclick="videoControl('headphone')">
+                                <span class="glyphicon glyphicon-headphones" aria-hidden="true"></span>
+                        </button>
+                        <button class="buttonControl1" onclick="videoControl('like')">
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                            <span id="likeCount"></span>
+                        </button>
+                        <button class="buttonControl1 redColor" onclick="videoControl('dislike')">
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                            <span id="dislikeCount"></span>
+                        </button>
+                        <i class="far fa-rectangle-landscape"></i>
+                    </div>
+                    <div class="progress">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="videoControls">
-                <button class="buttonControl" onclick="videoControl('play')">
-                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                </button>
-                <button class="buttonControl" onclick="videoControl('pause')">
-                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-                </button>
-                <button class="buttonControl" onclick="videoControl('stop')">
-                    <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-                </button>
-                <button id="minus" class="buttonControl" onclick="videoControl('minus')">
-                    <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-                </button>
-                <button id="plus" class="buttonControl" onclick="videoControl('plus')">
-                        <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-                </button>
-                <button id="plus" class="buttonControl" onclick="videoControl('headphone')">
-                        <span class="glyphicon glyphicon-headphones" aria-hidden="true"></span>
-                </button>
-                <button class="buttonControl1" onclick="videoControl('like')">
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    <span id="likeCount"></span>
-                </button>
-                <button class="buttonControl1 redColor" onclick="videoControl('dislike')">
-                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                    <span id="dislikeCount"></span>
-                </button>
-                <i class="far fa-rectangle-landscape"></i>
+                <div class="col-md-5" style="padding-top:50px">
+                    <button class="buttonControl" onclick="playlistControl('1')">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                    Introduction to HTML5
+                    <br/>
+                    <button class="buttonControl" onclick="playlistControl('2')">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                    Introduction to Styling with CSS3
+                    <br/>
+                    <button class="buttonControl" onclick="playlistControl('3')">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                    Introduction to Bootstrap 4
+                    <br/>
+                    <button class="buttonControl" onclick="playlistControl('4')">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                    Learn to create website with HTML5,CSS3 and BootStrap4
+                    <br/>
+                    <button class="buttonControl" onclick="playlistControl('5')">
+                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    </button>
+                    Introduction to Javascript
+                    <br/>
+                </div>
             </div>
         </div>
         <script>
@@ -97,6 +135,8 @@
                 } else {
                     alert("Sorry, your browser does not support Web Storage...");
                 }
+                document.getElementById("stop").disabled = true;
+                document.getElementById("pause").disabled = true;
                 vid.addEventListener('timeupdate', updateProgressBar, false);
             }
 
@@ -106,6 +146,29 @@
                 var percentage = Math.floor((100 / vid.duration) * vid.currentTime);
                 //progressBar.value = percentage;
                 progressBar.style.width = percentage + '%';
+            }
+
+            function playlistControl(paylist) {
+                console.log(paylist);
+                var vid = document.getElementById("myVideo");
+                var link = "";
+                if(paylist == "1") {
+                    link ="http://thenewcode.com/assets/videos/ocean-small.mp4"
+                } else if(paylist == "2") {
+                    link ="http://thenewcode.com/assets/videos/downtown-los-angeles.mp4"
+                } else if(paylist == "3") {
+                    link ="http://techslides.com/demos/sample-videos/small.mp4"
+                } else if(paylist == "4") {
+                    link ="https://ia800701.us.archive.org/26/items/SampleVideo1280x7205mb/SampleVideo_1280x720_5mb.mp4"
+                } else if(paylist == "5") {
+                    link ="https://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
+                }
+                vid.src = link;
+                vid.currentTime = 0;
+                vid.play();
+                document.getElementById("play").disabled = true;
+                document.getElementById("pause").disabled = false;
+                document.getElementById("stop").disabled = false;
             }
 
             function videoControl(action) {
@@ -124,11 +187,20 @@
                     init();
                 } else if(action == "play") {
                     vid.play();
+                    document.getElementById("play").disabled = true;
+                    document.getElementById("pause").disabled = false;
+                    document.getElementById("stop").disabled = false;
                 } else if(action == "pause") {
                     vid.pause();
+                    document.getElementById("pause").disabled = true;
+                    document.getElementById("play").disabled = false;
+                    document.getElementById("stop").disabled = false;
                 } else if(action == "stop") {
                     vid.pause();
                     vid.currentTime = 0;
+                    document.getElementById("stop").disabled = true;
+                    document.getElementById("pause").disabled = false;
+                    document.getElementById("play").disabled = false;
                 } else if(action == "plus") {
                     var vol =  parseFloat(vid.volume).toFixed(1);
                     if(vol < 1){
