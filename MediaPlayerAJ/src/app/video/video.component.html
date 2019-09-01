@@ -1,0 +1,18 @@
+<div class="container ">
+    <div class="row ">
+       <div class="column">
+          <app-player></app-player>
+          <app-control 
+          [playList]="playList" 
+          (unlikeClicked)="onUnlikeClicked($event)" 
+          (likeClicked)="onLikeClicked($event)">
+          </app-control>
+       </div>
+       <div class="column">
+          <app-playlist 
+          [playLists]="playLists" 
+          (clickedOnPlaylist)="onPlaylistClicked($event)">
+          </app-playlist>
+       </div>
+    </div>
+ </div>
