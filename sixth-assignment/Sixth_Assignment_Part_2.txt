@@ -1,0 +1,16 @@
+1. Unique Constraint to be created for the composite columns - USER_ONE_ID, USER_TWO_ID
+
+2. INSERT INTO relationship (user_one_id, user_two_id, status, action_user_id) VALUES (1, 2, 0, 1); COMMIT;
+
+3. UPDATE relationship SET status = 1 WHERE user_one_id = 2 AND user_two_id = 1; COMMIT;
+
+4. SELECT 'Y' FROM relationship WHERE user_one_id = ? AND user_two_id = ? AND status = 1;
+
+5. SELECT u.username AS friend FROM users u WHERE u.user_id IN (SELECT user_two_id FROM relationship WHERE user_one_id = 1 AND status = 1);
+
+6. SELECT u.username AS pending_friend FROM users u WHERE u.user_id IN (SELECT user_two_id FROM relationship WHERE user_one_id AND status = 0);
+
+7. SELECT status FROM relationship WHERE user_one_id = 1 and user_two_id = 7;
+
+
+	
