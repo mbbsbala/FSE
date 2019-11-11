@@ -1,0 +1,47 @@
+---------------------
+MAVEN
+--------------------
+
+1. mvn archetype:generate
+
+2. mvn archetype:generate -DarchetypeGroupId=com.iiht
+                       -DarchetypeArtifactId=seventh-assignment
+                       -DarchetypeVersion=1.0.0-SNAPSHOT
+                       -DgroupId=org.springframework.boot
+                       -DartifactId=spring-boot-starter-web
+                       -Dversion=2.2.0.RELEASE
+		       -DinteractiveMode=false
+
+3. a) mvn compile
+   b) mvn package
+   c) mvn exec:java
+   d) mvn clean
+
+
+--------------
+JUNIT 5
+-------------
+
+public class CalculationTest {
+	
+	Calculation calc;
+
+	@BeforeEach
+    	void init() {	
+        	calc = new Calculator();
+    	}
+	
+	@Test
+    	void addTest() {
+        	assertAll(
+            		() -> assertEquals(2, calc.add(1, 1), "Doesn't add two positive numbers properly"),
+            		() -> assertEquals(0, calc.add(-1, 1), "Doesn't add a negative and a positive number properly"),
+            		() -> assertNotNull(calc, "The calc variable should be initialized")
+       		);
+    	}
+
+	@Test
+	void subTest() {
+		assertEquals(1, calc.sub(2, 1), "output should be the difference of the two arguments");
+	}
+}
