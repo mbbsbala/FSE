@@ -1,4 +1,4 @@
-package com.iiht.config;
+package com.fse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

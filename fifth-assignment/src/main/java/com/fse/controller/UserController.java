@@ -1,4 +1,4 @@
-package com.iiht.controller;
+package com.fse.controller;
 
 import javax.validation.Valid;
 

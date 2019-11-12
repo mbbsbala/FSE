@@ -1,4 +1,4 @@
-package com.iiht.model.dao;
+package com.fse.model.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

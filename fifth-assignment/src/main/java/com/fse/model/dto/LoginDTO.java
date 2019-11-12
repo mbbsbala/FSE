@@ -1,4 +1,4 @@
-package com.iiht.model.dto;
+package com.fse.model.dto;
 
 import javax.validation.constraints.NotBlank;
 

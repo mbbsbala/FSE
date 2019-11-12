@@ -1,4 +1,4 @@
-package com.iiht;
+package com.fse;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

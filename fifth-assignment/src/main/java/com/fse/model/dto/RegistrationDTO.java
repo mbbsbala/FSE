@@ -1,4 +1,4 @@
-package com.iiht.model.dto;
+package com.fse.model.dto;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
